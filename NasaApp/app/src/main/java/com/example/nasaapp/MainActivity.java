@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner techSpinner;
     Button btnCloseTech;
     String selectedTechStr;
+    TextView txtTechName;
+    TextView txtTechHead;
 
     Dialog infoDialog;
     TextView txtHint;
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         techSpinner.setOnItemSelectedListener(this);
         txtTechInfo = techDialog.findViewById(R.id.txtTechInfo);
         txtTechInfo.setFocusable(false);
+        txtTechHead = techDialog.findViewById(R.id.txtTechHead);
 
         // All dashboard buttons
         btnInfraRed = findViewById(R.id.btnInfrared);
@@ -160,31 +163,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnInfraRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTechDialog(new InfraredImaging(), infrared);
+                showTechDialog(new InfraredImaging(), infrared, "InInfrared Imaging");
             }
         });
         btnSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTechDialog(new Sounding(), sounding);
+                showTechDialog(new Sounding(), sounding, "Sounding System");
             }
         });
         btnMicroWave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTechDialog(new MicrowaveImaging(), microWave);
+                showTechDialog(new MicrowaveImaging(), microWave, "Microwave Imaging");
             }
         });
         btnVision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTechDialog(new VisibleImagery(), visibility);
+                showTechDialog(new VisibleImagery(), visibility, "Visible Imaginary");
             }
         });
         btnOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTechDialog(new Others(), other);
+                showTechDialog(new Others(), other, "Others");
             }
         });
 
@@ -304,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         changeNimbus.dismiss();
         setInfomation(nimbus, nb); // changing the information after changing the nimbus
     }
-    private void showTechDialog(Technology tech, String selectedStr){
+    private void showTechDialog(Technology tech, String selectedStr, String name){
 //        Dialog techDialog;
 //        Technology tech;
 //        Spinner techSpinner;
@@ -321,6 +324,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // set info about that
         // task to done here......
         txtTechInfo.setText(tech.getInfo(0));
+        txtTechHead.setText(name);
     }
 
     @Override
