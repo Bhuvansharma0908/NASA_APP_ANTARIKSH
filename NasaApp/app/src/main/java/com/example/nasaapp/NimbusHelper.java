@@ -273,7 +273,10 @@ class Nimbus_3 implements Nimbus{
 
                 +"Infrared Imaging:\n"
                 +"High Resolution Infrared Radiometer\n"
-                +"Medium Resolution Infrared Radiometer\n";
+                +"Medium Resolution Infrared Radiometer\n\n"
+            
+                +"Sounding:\n"
+                +"Infrared Interferometer Spectrometer\n";
     }
 }
 
