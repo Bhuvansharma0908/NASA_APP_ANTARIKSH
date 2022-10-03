@@ -489,9 +489,3 @@ window.onresize = () => {
   camera.aspect = WIDTH / HEIGHT;
   camera.updateProjectionMatrix();
 };
-
-// inspiration/credits:
-
-// https://codepen.io/murdoc/pen/aOPaqZ?editors=0010#0
-// https://codepen.io/carrot-e/pen/WGkJBZ?editors=0010
-// https://codepen.io/Yakudoo/pen/eNmjEv?editors=0010

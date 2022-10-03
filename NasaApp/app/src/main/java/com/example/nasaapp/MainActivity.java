@@ -6,9 +6,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
@@ -25,7 +27,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    String[] country = { "India", "USA", "China", "Japan", "Other"};
+
     ImageButton btnInfraRed, btnLaunch, btnSound, btnVision, btnMicroWave, btnOther, btnInfo, btnChange;
     Dialog changeNimbus;
     TextView txtLocation, txtVehicle, txtName;
@@ -65,10 +67,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     int selectedNimbus = 1;
 
+    MediaPlayer launchMusic, explodeMusic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // for full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        // Loading the music for rocket
+        launchMusic = MediaPlayer.create(this, R.raw.launch);
+        launchMusic.setLooping(false);
+        explodeMusic = MediaPlayer.create(this, R.raw.explode);
+        explodeMusic.setLooping(false);
+
         webView = findViewById(R.id.webview);
         webView.loadUrl("file:///android_asset/index.html");
         webView.getSettings().setJavaScriptEnabled(true);
@@ -133,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if(checkStatus()){
                     Toast.makeText(MainActivity.this, "Launching Successfully.", Toast.LENGTH_LONG).show();
                     webView.startAnimation(launchRocket);
-
+                    launchMusic.start();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable(){
                         @Override
@@ -146,15 +160,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             MainActivity.this.finish();
                         }
                     }, 2200);
-
-
-//                    webView.loadUrl("file:///android_asset/index_1.html");
-//                    webView.getSettings().setJavaScriptEnabled(true);
-//                    webView.setWebViewClient(new WebViewClient());
-//                    webView.setBackgroundColor(Color.TRANSPARENT);
                 }else{
                     // explode it.
                     webView.startAnimation(crashRocket);
+                    explodeMusic.start();
                     Toast.makeText(MainActivity.this, "Mission failed.", Toast.LENGTH_LONG).show();
                 }
             }
@@ -426,30 +435,3 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 }
-
-
-
-//Getting the instance of Spinner and applying OnItemSelectedListener on it
-//        Spinner spin = (Spinner) findViewById(R.id.spinner);
-//        spin.setOnItemSelectedListener(this);
-
-//Creating the ArrayAdapter instance having the country list
-//        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,country);
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spin.setAdapter(aa);
-
-
-//    }
-
-//Performing action onItemSelected and onNothing selected
-
-//    @Override
-//    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-//        Nimbus n=new Nimbus_1();
-//        Toast.makeText(getApplicationContext(), n.getName(), Toast.LENGTH_LONG).show();
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> arg0) {
-//        // TODO Auto-generated method stub
-//    }

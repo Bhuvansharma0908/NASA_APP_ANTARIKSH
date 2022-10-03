@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -15,10 +16,12 @@ public class RocketLaunch extends AppCompatActivity {
     WebView webRocketView;
     TextView txtLaunchDate, txtPartners, txtObjective;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // for full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_rocket_launch);
 
         // Initializing the web view content
@@ -70,8 +73,6 @@ public class RocketLaunch extends AppCompatActivity {
                 startActivity(i);
                 RocketLaunch.this.finish();
             }
-        }, 18000);
-
-
+        }, 17000);
     }
 }

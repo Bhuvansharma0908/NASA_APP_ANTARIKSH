@@ -23,6 +23,9 @@ public class splashscreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_splashscreen);
 
         TextView hindiName = findViewById(R.id.hindi_name);
@@ -47,7 +50,7 @@ public class splashscreen extends AppCompatActivity {
                 splashscreen.this.startActivity(i);
                 splashscreen.this.finish();
             }
-        }, 6000);
+        }, 5000);
 
     }
 }
